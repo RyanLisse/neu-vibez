@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes';
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
+import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import {
   RainbowKitProvider,
   getDefaultWallets,
@@ -16,9 +17,9 @@ import Navbar from '@components/Navbar';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
-    chain.polygon, chain.polygonMumbai,
+    chain.polygonMumbai,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true'
-      ? [chain.polygon, chain.polygonMumbai]
+      ? [chain.polygonMumbai]
       : []),
   ],
   [
@@ -26,7 +27,7 @@ const { chains, provider, webSocketProvider } = configureChains(
     publicProvider(),
   ]
 );
-
+const activeChainId = ChainId.Mumbai;
 const { wallets } = getDefaultWallets({
   appName: 'Neu Vibez',
   chains,
@@ -58,11 +59,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
+            <ThirdwebProvider desiredChainId={activeChainId}>
             <Navbar />
+
             <Component {...pageProps} />
             <Script src="https://kit.fontawesome.com/2be46174eb.js" crossOrigin="anonymous"></Script>
+            </ThirdwebProvider>
           </RainbowKitProvider>
         </WagmiConfig>
+
       </div>
     </ThemeProvider>
   );

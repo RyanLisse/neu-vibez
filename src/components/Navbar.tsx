@@ -20,7 +20,7 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            <ConnectButton />
+            {/* <ConnectButton /> */}
         </nav>
     );
 };

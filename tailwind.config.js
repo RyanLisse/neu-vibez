@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -17,6 +17,7 @@ module.exports = {
         'file-active': '#2196f3',
         'file-accept': '#00e676',
         'file-reject': '#ff1744',
+        'neu-vibes': '#8FFD08',
         'overlay-black': 'rgba(0, 0, 0, 0.8)',
       },
       width: {
